@@ -1,5 +1,7 @@
 package fr.polytech.model;
 
+import org.springframework.web.client.HttpClientErrorException;
+
 import java.util.UUID;
 
 public class PlanDTO {
@@ -63,5 +65,11 @@ public class PlanDTO {
 
     public void setMonthsDuration(Integer monthsDuration) {
         this.monthsDuration = monthsDuration;
+    }
+
+    public void validateAttributes() throws HttpClientErrorException {
+        if (name == null || description == null || price == null || currency == null || monthsDuration == null) {
+            throw new HttpClientErrorException(org.springframework.http.HttpStatus.BAD_REQUEST, "Missing attributes");
+        }
     }
 }

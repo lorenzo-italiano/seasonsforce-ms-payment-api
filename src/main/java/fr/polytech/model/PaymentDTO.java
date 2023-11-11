@@ -3,7 +3,7 @@ package fr.polytech.model;
 import java.util.Date;
 import java.util.UUID;
 
-public class PaymentDetailsDTO {
+public class PaymentDTO {
 
     private UUID id;
 
@@ -15,11 +15,9 @@ public class PaymentDetailsDTO {
 
     private UUID planId;
 
-    private UUID invoiceId;
-
     private PaymentMethod paymentMethod;
 
-    public PaymentDetailsDTO() { }
+    public PaymentDTO() { }
 
     public UUID getId() {
         return id;
@@ -59,14 +57,6 @@ public class PaymentDetailsDTO {
 
     public void setPlanId(UUID planId) {
         this.planId = planId;
-    }
-
-    public UUID getInvoiceId() {
-        return invoiceId;
-    }
-
-    public void setInvoiceId(UUID invoiceId) {
-        this.invoiceId = invoiceId;
     }
 
     public PaymentMethod getPaymentMethod() {
