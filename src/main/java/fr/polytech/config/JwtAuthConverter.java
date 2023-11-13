@@ -25,9 +25,8 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
         this.jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
     }
 
-    // You can put these values in the `.env` file
-    private final String principleAttribute = "preferred_username";
-    private final String resourceId = "<client_name>";
+    private final String principleAttribute = System.getenv("PRINCIPLE_ATTRIBUTE_NAME");
+    private final String resourceId = System.getenv("RESOURCE_ID");
 
     @Override
     public AbstractAuthenticationToken convert(@NonNull Jwt jwt) {

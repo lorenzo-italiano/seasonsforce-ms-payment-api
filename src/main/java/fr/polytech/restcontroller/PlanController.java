@@ -33,7 +33,7 @@ public class PlanController {
      * @return List of all plans.
      */
     @GetMapping("/")
-    @PreAuthorize("hasAnyRole('client_recruiter', 'client_admin')")
+    @PreAuthorize("hasRole('client_recruiter') or hasRole('client_admin')")
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Plan>> getAllPlans() {
         try {
@@ -56,7 +56,7 @@ public class PlanController {
      * @return Plan with the specified id.
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('client_recruiter', 'client_admin')")
+    @PreAuthorize("hasRole('client_recruiter') or hasRole('client_admin')")
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Plan> getPlanById(@PathVariable("id") UUID id) {
         try {
@@ -79,7 +79,7 @@ public class PlanController {
      * @return Plan with the specified currency.
      */
     @GetMapping("/currency/{currency}")
-    @PreAuthorize("hasAnyRole('client_recruiter', 'client_admin')")
+    @PreAuthorize("hasRole('client_recruiter') or hasRole('client_admin')")
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Plan>> getPlanByCurrency(@PathVariable("currency") String currency) {
         try {

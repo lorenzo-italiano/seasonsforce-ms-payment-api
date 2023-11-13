@@ -5,7 +5,6 @@ import fr.polytech.model.PaymentDTO;
 import fr.polytech.model.PaymentMethod;
 import fr.polytech.service.PaymentService;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.Produces;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,7 +127,7 @@ public class PaymentController {
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Payment> createPayment(
             @RequestBody PaymentDTO payment,
-            @HeaderParam("Authorization") String token
+            @RequestHeader("Authorization") String token
     ) {
         try {
             Payment createdPayment = paymentService.createPayment(payment, token);

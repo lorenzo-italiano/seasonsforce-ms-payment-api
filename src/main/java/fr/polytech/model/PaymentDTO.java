@@ -11,8 +11,6 @@ public class PaymentDTO {
 
     private Date paymentDate;
 
-    private Date expiresOn;
-
     private UUID planId;
 
     private PaymentMethod paymentMethod;
@@ -41,14 +39,6 @@ public class PaymentDTO {
 
     public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
-    }
-
-    public Date getExpiresOn() {
-        return expiresOn;
-    }
-
-    public void setExpiresOn(Date expiresOn) {
-        this.expiresOn = expiresOn;
     }
 
     public UUID getPlanId() {
