@@ -1,5 +1,8 @@
 package fr.polytech.restcontroller;
 
+import fr.polytech.annotation.IsAdmin;
+import fr.polytech.annotation.IsRecruiter;
+import fr.polytech.annotation.IsRecruiterOrAdmin;
 import fr.polytech.model.Payment;
 import fr.polytech.model.PaymentDTO;
 import fr.polytech.model.PaymentMethod;
@@ -12,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -34,7 +36,7 @@ public class PaymentController {
      * @return List of all payments.
      */
     @GetMapping("/")
-    @PreAuthorize("hasRole('client_admin')")
+    @IsAdmin
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Payment>> getPayment() {
         try {
@@ -57,7 +59,7 @@ public class PaymentController {
      * @return Payment with the specified id.
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('client_recruiter', 'client_admin')")
+    @IsRecruiterOrAdmin
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Payment> getPaymentById(@PathVariable("id") UUID id) {
         try {
@@ -80,7 +82,7 @@ public class PaymentController {
      * @return Payment with the specified user id.
      */
     @GetMapping("/user/{id}")
-    @PreAuthorize("hasAnyRole('client_recruiter', 'client_admin')")
+    @IsRecruiterOrAdmin
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Payment>> getPaymentByUserId(@PathVariable("id") UUID id) {
         try {
@@ -102,7 +104,7 @@ public class PaymentController {
      * @return List of available payment methods.
      */
     @GetMapping("/methods/")
-    @PreAuthorize("hasAnyRole('client_recruiter', 'client_admin')")
+    @IsRecruiterOrAdmin
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PaymentMethod>> getPaymentByPaymentMethod() {
         try {
@@ -122,7 +124,7 @@ public class PaymentController {
      * @return Created payment.
      */
     @PostMapping("/")
-    @PreAuthorize("hasRole('client_recruiter')")
+    @IsRecruiter
     @Consumes(MediaType.APPLICATION_JSON_VALUE)
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Payment> createPayment(

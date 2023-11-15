@@ -1,5 +1,7 @@
 package fr.polytech.restcontroller;
 
+import fr.polytech.annotation.IsAdmin;
+import fr.polytech.annotation.IsRecruiterOrAdmin;
 import fr.polytech.model.Plan;
 import fr.polytech.model.PlanDTO;
 import fr.polytech.service.PlanService;
@@ -11,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -33,7 +34,7 @@ public class PlanController {
      * @return List of all plans.
      */
     @GetMapping("/")
-    @PreAuthorize("hasRole('client_recruiter') or hasRole('client_admin')")
+    @IsRecruiterOrAdmin
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Plan>> getAllPlans() {
         try {
@@ -56,7 +57,7 @@ public class PlanController {
      * @return Plan with the specified id.
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('client_recruiter') or hasRole('client_admin')")
+    @IsRecruiterOrAdmin
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Plan> getPlanById(@PathVariable("id") UUID id) {
         try {
@@ -79,7 +80,7 @@ public class PlanController {
      * @return Plan with the specified currency.
      */
     @GetMapping("/currency/{currency}")
-    @PreAuthorize("hasRole('client_recruiter') or hasRole('client_admin')")
+    @IsRecruiterOrAdmin
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Plan>> getPlanByCurrency(@PathVariable("currency") String currency) {
         try {
@@ -102,7 +103,7 @@ public class PlanController {
      * @return Updated plan.
      */
     @PutMapping("/")
-    @PreAuthorize("hasRole('client_admin')")
+    @IsAdmin
     @Consumes(MediaType.APPLICATION_JSON_VALUE)
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Plan> updatePlan(@RequestBody PlanDTO plan) {
@@ -126,7 +127,7 @@ public class PlanController {
      * @return Created plan.
      */
     @PostMapping("/")
-    @PreAuthorize("hasRole('client_admin')")
+    @IsAdmin
     @Consumes(MediaType.APPLICATION_JSON_VALUE)
     @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Plan> createPlan(@RequestBody PlanDTO plan) {
@@ -150,7 +151,7 @@ public class PlanController {
      * @return True if the plan has been deleted, false otherwise.
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('client_admin')")
+    @IsAdmin
     @Produces(MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<Boolean> deletePlan(@PathVariable("id") UUID id) {
         try {
