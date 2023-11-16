@@ -12,6 +12,7 @@ public class RecruiterDTO {
     private String username;
     private String role;
     private Boolean isRegistered;
+    private Boolean toBeRemoved;
     private Date birthdate;
     private String citizenship;
     private String phone;
@@ -79,6 +80,14 @@ public class RecruiterDTO {
 
     public void setRegistered(Boolean registered) {
         isRegistered = registered;
+    }
+
+    public Boolean getToBeRemoved() {
+        return toBeRemoved;
+    }
+
+    public void setToBeRemoved(Boolean toBeRemoved) {
+        this.toBeRemoved = toBeRemoved;
     }
 
     public Date getBirthdate() {
