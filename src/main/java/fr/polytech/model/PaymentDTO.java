@@ -1,30 +1,21 @@
 package fr.polytech.model;
 
-import jakarta.persistence.*;
-
 import java.util.Date;
 import java.util.UUID;
 
-@Entity
-@Table(name = "payment", schema = "public")
-public class Payment {
+public class PaymentDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private UUID recruiterId;
 
     private Date paymentDate;
 
-    private Date expiresOn;
-
     private UUID planId;
 
-    private UUID invoiceId;
-
-    @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
+
+    public PaymentDTO() { }
 
     public UUID getId() {
         return id;
@@ -50,28 +41,12 @@ public class Payment {
         this.paymentDate = paymentDate;
     }
 
-    public Date getExpiresOn() {
-        return expiresOn;
-    }
-
-    public void setExpiresOn(Date expiresOn) {
-        this.expiresOn = expiresOn;
-    }
-
     public UUID getPlanId() {
         return planId;
     }
 
     public void setPlanId(UUID planId) {
         this.planId = planId;
-    }
-
-    public UUID getInvoiceId() {
-        return invoiceId;
-    }
-
-    public void setInvoiceId(UUID invoiceId) {
-        this.invoiceId = invoiceId;
     }
 
     public PaymentMethod getPaymentMethod() {
